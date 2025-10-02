@@ -54,6 +54,18 @@ export interface Signal {
   generated_at: string;
 }
 
+// Signal Strength Chart Types
+export interface SignalDataPoint {
+  timestamp: string;
+  ticker: string;
+  signalStrength: number; // -100 to +100
+  action: 'BUY' | 'SELL' | 'HOLD';
+  confidence: number; // 0-1
+  reasons: string[];
+  citations: Citation[];
+  generated_at: string;
+}
+
 // Subscription Types
 export interface Subscription {
   id: number;

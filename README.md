@@ -21,6 +21,7 @@
 - ⚖️ **Risk Management**: Confidence gating and compliance rule enforcement
 - 📄 **Investment Memos**: Automated PDF report generation with citations
 - 🎯 **Trading Signals**: BUY/SELL/HOLD recommendations with confidence scores
+- 📊 **Real-time Signal Chart**: Multi-ticker signal strength visualization with interactive markers
 
 ## Architecture
 

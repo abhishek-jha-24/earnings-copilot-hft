@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import {
   KpiData,
   Signal,
@@ -164,7 +164,8 @@ class ApiService {
 
   // SSE connection
   createEventSource(userId: string): EventSource {
-    const url = `${this.api.defaults.baseURL}/events/stream?user_id=${userId}`;
+    const apiKey = this.apiKey || localStorage.getItem('apiKey') || '';
+    const url = `${this.api.defaults.baseURL}/events/stream?api_key=${encodeURIComponent(apiKey)}&user_id=${userId}`;
     return new EventSource(url);
   }
 }

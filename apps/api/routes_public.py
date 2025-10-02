@@ -184,13 +184,30 @@ async def get_signal(
 @router.get("/events/stream")
 async def events_stream(
     request: Request,
-    user_id: str = Depends(get_current_user_id)
+    api_key: Optional[str] = Query(None, description="API key for authentication"),
+    user_id: Optional[str] = Query(None, description="User ID (if API key provided)")
 ):
     """
     Server-Sent Events stream for real-time notifications.
     
     Events: NEW_DOC_INGESTED, NEW_SIGNAL_READY, COMPLIANCE_ALERT
     """
+    # Authenticate user
+    if api_key:
+        from apps.api.auth import get_user_id_from_api_key
+        authenticated_user_id = get_user_id_from_api_key(api_key)
+        if not authenticated_user_id:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid API key"
+            )
+        user_id = authenticated_user_id
+    elif not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="API key or user_id required"
+        )
+    
     async def event_generator():
         try:
             async for message in sse_stream_for_user(user_id, request):

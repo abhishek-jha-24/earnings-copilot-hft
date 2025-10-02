@@ -28,9 +28,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { apiService } from '../services/api';
 import { Signal, KpiData, SearchResponse, TickerSummary } from '../types';
 import LoginForm from './LoginForm';
+import SignalStrengthChart from './SignalStrengthChart';
+import { useSubscriptions } from '../hooks/useSubscriptions';
 
 const TraderDashboard: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
+  const { subscriptions } = useSubscriptions();
   const [selectedTicker, setSelectedTicker] = useState('AAPL');
   const [signal, setSignal] = useState<Signal | null>(null);
   const [kpis, setKpis] = useState<KpiData[]>([]);
@@ -319,6 +322,14 @@ const TraderDashboard: React.FC = () => {
             ))}
           </Box>
         )}
+      </Paper>
+
+      {/* Signal Strength Chart */}
+      <Paper sx={{ p: 2, mb: 3 }}>
+        <SignalStrengthChart 
+          subscribedTickers={subscriptions.map(sub => sub.ticker)}
+          className="signal-strength-chart"
+        />
       </Paper>
     </Box>
   );
