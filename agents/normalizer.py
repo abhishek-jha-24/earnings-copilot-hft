@@ -190,45 +190,56 @@ class DataNormalizer:
             hist_lookup[key].append(kpi)
         
         for current_kpi in current_kpis:
-            ticker = current_kpi["ticker"]
-            metric = current_kpi["metric"]
-            current_value = current_kpi["value"]
-            current_period = current_kpi["period"]
+            ticker = current_kpi.get("ticker")
+            metric = current_kpi.get("metric")
+            current_value = current_kpi.get("value")
+            current_period = current_kpi.get("period")
+            
+            # Skip if any required fields are None
+            if not all([ticker, metric, current_value is not None, current_period]):
+                continue
             
             key = (ticker, metric)
             if key in hist_lookup:
                 # Find comparable periods
                 for hist_kpi in hist_lookup[key]:
-                    hist_period = hist_kpi["period"]
-                    hist_value = hist_kpi["value"]
+                    hist_period = hist_kpi.get("period")
+                    hist_value = hist_kpi.get("value")
                     
-                    if hist_value and hist_value != 0:
-                        delta_abs = current_value - hist_value
-                        delta_pct = delta_abs / hist_value
-                        
-                        # Determine if this is YoY or QoQ comparison
-                        comparison_type = self._determine_comparison_type(current_period, hist_period)
-                        
-                        if comparison_type:
-                            delta = {
-                                "ticker": ticker,
-                                "period": current_period,
-                                "metric": metric,
-                                "current_value": current_value,
-                                "previous_value": hist_value,
-                                "previous_period": hist_period,
-                                "delta_abs": delta_abs,
-                                "delta_pct": delta_pct,
-                                "comparison_type": comparison_type,
-                                "significance": self._determine_significance(delta_pct, metric),
-                                "provenance": current_kpi["provenance"]
-                            }
-                            deltas.append(delta)
+                    # Skip if historical data is incomplete
+                    if not hist_period or hist_value is None or hist_value == 0:
+                        continue
+                    
+                    delta_abs = current_value - hist_value
+                    delta_pct = delta_abs / hist_value
+                    
+                    # Determine if this is YoY or QoQ comparison
+                    comparison_type = self._determine_comparison_type(current_period, hist_period)
+                    
+                    if comparison_type:
+                        delta = {
+                            "ticker": ticker,
+                            "period": current_period,
+                            "metric": metric,
+                            "current_value": current_value,
+                            "previous_value": hist_value,
+                            "previous_period": hist_period,
+                            "delta_abs": delta_abs,
+                            "delta_pct": delta_pct,
+                            "comparison_type": comparison_type,
+                            "significance": self._determine_significance(delta_pct, metric),
+                            "provenance": current_kpi.get("provenance", {})
+                        }
+                        deltas.append(delta)
         
         return deltas
     
     def _determine_comparison_type(self, current_period: str, hist_period: str) -> str:
         """Determine if comparison is YoY or QoQ."""
+        # Check for None values first
+        if not current_period or not hist_period:
+            return "other"
+            
         # Simple logic - in practice would be more sophisticated
         if "Q" in current_period and "Q" in hist_period:
             # Extract years and quarters

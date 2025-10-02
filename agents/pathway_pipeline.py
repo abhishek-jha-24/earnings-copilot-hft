@@ -416,7 +416,12 @@ class MockPathwayPipeline:
         if not periods:
             return {}
         
-        latest_period = sorted(periods)[-1]
+        # Filter out None values and sort safely
+        valid_periods = [p for p in periods if p is not None]
+        if not valid_periods:
+            return {}
+        
+        latest_period = sorted(valid_periods)[-1]
         return self.kpi_data[ticker][latest_period]
     
     async def get_deltas(self, ticker: str, period: str) -> List[Dict[str, Any]]:
