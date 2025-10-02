@@ -16,6 +16,7 @@
 
 - 🤖 **AI Document Processing**: LandingAI ADE (DPT-2) extracts KPIs from earnings reports
 - 📊 **Live Data Pipeline**: Pathway hybrid search (BM25 + vectors) for real-time indexing
+- ⚡ **Real-time Processing**: Pathway framework for streaming data analytics (macOS/Linux)
 - 🔔 **Real-time Notifications**: SSE-based alerts for new documents, signals, and compliance
 - ⚖️ **Risk Management**: Confidence gating and compliance rule enforcement
 - 📄 **Investment Memos**: Automated PDF report generation with citations
@@ -42,6 +43,12 @@
 ```
 
 ## Quick Start
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- LandingAI API Key (for document extraction)
+- **Pathway Framework**: Only available on macOS and Linux (Windows uses enhanced mock)
 
 ### 1. Setup Environment
 

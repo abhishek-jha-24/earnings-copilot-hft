@@ -3,7 +3,8 @@ uvicorn[standard]
 pydantic
 python-multipart
 streamlit
-pathway
+# Pathway (only available on macOS and Linux)
+# pathway>=0.26.2  # Uncomment if running on macOS/Linux
 pandas
 numpy
 scikit-learn
