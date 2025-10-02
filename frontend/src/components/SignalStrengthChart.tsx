@@ -328,7 +328,7 @@ export const SignalStrengthChart: React.FC<SignalStrengthChartProps> = ({
                 stroke={COLORS[index % COLORS.length]}
                 strokeWidth={2}
                 dot={<CustomDot ticker={ticker} />}
-                connectNulls={false}
+                connectNulls={true}
               />
             ))}
           </LineChart>
