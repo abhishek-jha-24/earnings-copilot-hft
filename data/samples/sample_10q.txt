@@ -1,0 +1,45 @@
+# Sample 10-Q Financial Data (Text Format)
+# This represents what would be extracted from actual PDF files
+
+APPLE INC.
+CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS
+(Unaudited)
+(In millions, except number of shares which are reflected in thousands and per share amounts)
+
+Three Months Ended June 30, 2025
+
+                                    2025        2024
+Net sales:
+  Products                        $105,123    $98,567
+  Services                         $18,327    $16,234
+Total net sales                   $123,450   $114,801
+
+Cost of sales:
+  Products                         $62,074    $58,340
+  Services                          $5,498     $4,890
+Total cost of sales               $67,572    $63,230
+
+Gross margin                      $55,878    $51,571
+
+Operating expenses:
+  Research and development         $7,442     $6,789
+  Selling, general and administrative $6,234  $5,876
+Total operating expenses          $13,676    $12,665
+
+Operating income                  $42,202    $38,906
+
+Other income/(expense), net        $1,234     $1,098
+
+Income before provision for income taxes $43,436 $40,004
+
+Provision for income taxes         $8,687     $8,001
+
+Net income                        $34,749    $32,003
+
+Earnings per share:
+  Basic                            $1.85      $1.72
+  Diluted                          $1.83      $1.70
+
+Shares used in computing earnings per share:
+  Basic                           18,783,456  18,601,234
+  Diluted                         18,987,654  18,825,789

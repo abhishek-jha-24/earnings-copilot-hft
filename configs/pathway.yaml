@@ -1,0 +1,90 @@
+# Pathway configuration for earnings copilot
+# This would be used to configure the actual Pathway pipeline
+
+pipeline:
+  name: "earnings-copilot-pipeline"
+  version: "1.0"
+  
+data_sources:
+  - name: "kpi_jsonl"
+    type: "file"
+    path: "data/normalized/"
+    format: "jsonl"
+    schema:
+      ticker: str
+      period: str
+      metric: str
+      value: float
+      unit: str
+      confidence: float
+      needs_review: bool
+      provenance: dict
+      extracted_at: str
+  
+  - name: "document_chunks"
+    type: "file"
+    path: "data/chunks/"
+    format: "jsonl"
+    schema:
+      doc_id: str
+      chunk_id: str
+      text: str
+      page: int
+      metadata: dict
+
+transformations:
+  - name: "kpi_latest"
+    type: "reduce"
+    groupby: ["ticker", "metric"]
+    select: "latest"
+    key: "extracted_at"
+    
+  - name: "kpi_history"
+    type: "append"
+    dedupe_key: ["ticker", "period", "metric"]
+    
+  - name: "delta_calculations"
+    type: "window"
+    window_type: "session"
+    groupby: ["ticker", "metric"]
+    functions:
+      - "yoy_change"
+      - "qoq_change"
+      - "trend_analysis"
+
+indexes:
+  - name: "kpi_search"
+    type: "hybrid"
+    bm25_weight: 0.3
+    vector_weight: 0.7
+    fields: ["ticker", "metric", "period"]
+    
+  - name: "document_search"
+    type: "vector"
+    embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+    fields: ["text"]
+    metadata_fields: ["doc_id", "page", "ticker"]
+
+outputs:
+  - name: "kpi_api"
+    type: "rest_connector"
+    endpoint: "/pathway/kpi"
+    
+  - name: "search_api"
+    type: "rest_connector"
+    endpoint: "/pathway/search"
+    
+  - name: "delta_api"
+    type: "rest_connector"
+    endpoint: "/pathway/deltas"
+
+monitoring:
+  metrics:
+    - "processing_latency"
+    - "index_size"
+    - "query_performance"
+  alerts:
+    - condition: "processing_latency > 10s"
+      action: "email"
+    - condition: "error_rate > 5%"
+      action: "slack"

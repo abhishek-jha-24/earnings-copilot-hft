@@ -1,0 +1,21 @@
+{
+  "ticker": "AAPL",
+  "period": "2025-Q3",
+  "metric": "revenue",
+  "value": 123.45,
+  "unit": "B",
+  "yoy_change": 0.08,
+  "qoq_change": 0.03,
+  "consensus": 120.0,
+  "surprise": 0.029,
+  "provenance": {
+    "doc": "aapl_10q_2025_q3.pdf",
+    "page": 15,
+    "table": "income_statement",
+    "row": 3,
+    "col": 2
+  },
+  "confidence": 0.95,
+  "needs_review": false,
+  "extracted_at": "2025-10-02T19:12:35Z"
+}

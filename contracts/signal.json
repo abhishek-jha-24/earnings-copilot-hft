@@ -1,0 +1,21 @@
+{
+  "ticker": "AAPL",
+  "period": "2025-Q3",
+  "action": "SELL",
+  "confidence": 0.78,
+  "reasons": [
+    "EPS miss vs consensus (-2.8%)",
+    "Revenue growth deceleration",
+    "Margin compression"
+  ],
+  "citations": [
+    {
+      "doc": "aapl_10q_2025_q3.pdf",
+      "page": 15,
+      "table": "income_statement",
+      "text": "Net income per share: $1.72 vs $1.80 consensus"
+    }
+  ],
+  "blocked_reason": null,
+  "generated_at": "2025-10-02T19:15:42Z"
+}

@@ -1,0 +1,10 @@
+ticker,period,metric,consensus_value,unit
+AAPL,2025-Q3,revenue,120.0,B
+AAPL,2025-Q3,eps,1.80,USD
+AAPL,2025-Q3,gross_margin,0.45,ratio
+MSFT,2025-Q3,revenue,65.0,B
+MSFT,2025-Q3,eps,2.95,USD
+MSFT,2025-Q3,gross_margin,0.68,ratio
+GOOGL,2025-Q3,revenue,85.0,B
+GOOGL,2025-Q3,eps,1.45,USD
+GOOGL,2025-Q3,gross_margin,0.56,ratio

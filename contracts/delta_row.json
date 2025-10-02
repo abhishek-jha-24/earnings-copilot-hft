@@ -1,0 +1,19 @@
+{
+  "ticker": "AAPL",
+  "period": "2025-Q3",
+  "metric": "eps",
+  "current_value": 1.85,
+  "previous_value": 1.72,
+  "delta_abs": 0.13,
+  "delta_pct": 0.076,
+  "consensus": 1.80,
+  "surprise": 0.028,
+  "significance": "material",
+  "provenance": {
+    "doc": "aapl_10q_2025_q3.pdf",
+    "page": 15,
+    "table": "income_statement",
+    "row": 8,
+    "col": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "user_id": "u_123",
+  "ticker": "AAPL",
+  "channels": ["ws", "slack"],
+  "created_at": "2025-10-02T19:00:00Z"
+}

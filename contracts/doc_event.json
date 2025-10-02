@@ -1,0 +1,8 @@
+{
+  "event": "NEW_DOC_INGESTED",
+  "doc_id": "aapl_10q_2025_q3",
+  "ticker": "AAPL",
+  "period": "2025-Q3",
+  "doc_type": "earnings",
+  "received_at": "2025-10-02T19:12:30Z"
+}

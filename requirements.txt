@@ -1,0 +1,20 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart
+streamlit
+pathway
+pandas
+numpy
+scikit-learn
+jinja2
+markdown
+weasyprint
+sqlalchemy
+aiosqlite
+itsdangerous
+# LandingAI ADE client (adjust name if different)
+landingai-ade
+aiohttp
+aiofiles
+httpx

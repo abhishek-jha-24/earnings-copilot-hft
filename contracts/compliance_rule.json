@@ -1,0 +1,16 @@
+{
+  "rule_id": "tech_large_margin_2025_q4",
+  "scope_class": "TECH-LARGE",
+  "scope_tickers": ["AAPL", "MSFT", "GOOGL", "AMZN"],
+  "initial_margin": 0.30,
+  "maintenance_margin": 0.25,
+  "effective_date": "2025-12-01",
+  "provenance": {
+    "doc": "sec_margin_update_2025_q4.pdf",
+    "page": 3,
+    "table": "margin_requirements",
+    "row": 2,
+    "col": 4
+  },
+  "confidence": 0.92
+}
