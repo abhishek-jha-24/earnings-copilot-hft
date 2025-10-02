@@ -1,6 +1,12 @@
 # 📈 Earnings Copilot HFT
 
-> AI-powered earnings analysis and trading signals with real-time notifications
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/React-18+-blue.svg)](https://reactjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org)
+[![LandingAI](https://img.shields.io/badge/LandingAI-ADE-orange.svg)](https://landing.ai)
+
+> AI-powered earnings analysis and trading signals with real-time notifications and LandingAI ADE integration
 
 ## Overview
 
