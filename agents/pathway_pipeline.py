@@ -395,6 +395,14 @@ class MockPathwayPipeline:
             period = row.get("period", "latest")
             metric = row.get("metric", "unknown")
             
+            # Ensure ticker and period are valid strings
+            if not ticker or not isinstance(ticker, str):
+                ticker = "UNKNOWN"
+            if not period or not isinstance(period, str):
+                period = "latest"
+            if not metric or not isinstance(metric, str):
+                metric = "unknown"
+            
             if ticker not in self.kpi_data:
                 self.kpi_data[ticker] = {}
             if period not in self.kpi_data[ticker]:
@@ -417,11 +425,17 @@ class MockPathwayPipeline:
             return {}
         
         # Filter out None values and sort safely
-        valid_periods = [p for p in periods if p is not None]
+        valid_periods = [p for p in periods if p is not None and isinstance(p, str)]
         if not valid_periods:
             return {}
         
-        latest_period = sorted(valid_periods)[-1]
+        # Sort periods safely, handling mixed types
+        try:
+            latest_period = sorted(valid_periods)[-1]
+        except TypeError:
+            # If sorting fails due to mixed types, just use the first valid period
+            latest_period = valid_periods[0]
+        
         return self.kpi_data[ticker][latest_period]
     
     async def get_deltas(self, ticker: str, period: str) -> List[Dict[str, Any]]:
@@ -495,7 +509,17 @@ class MockPathwayPipeline:
         """Mock get KPI history operation."""
         history = []
         if ticker in self.kpi_data:
-            for period in sorted(self.kpi_data[ticker].keys()):
+            # Filter out None periods and sort safely
+            valid_periods = [p for p in self.kpi_data[ticker].keys() 
+                           if p is not None and isinstance(p, str)]
+            
+            try:
+                sorted_periods = sorted(valid_periods)
+            except TypeError:
+                # If sorting fails, use unsorted valid periods
+                sorted_periods = valid_periods
+            
+            for period in sorted_periods:
                 if metric in self.kpi_data[ticker][period]:
                     kpi_data = self.kpi_data[ticker][period][metric]
                     history.append({
